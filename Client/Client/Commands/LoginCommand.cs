@@ -1,4 +1,5 @@
-﻿using Client.WPF.State.Authenticators;
+﻿using Client.WPF.Exceptions;
+using Client.WPF.State.Authenticators;
 using Client.WPF.State.Navigators;
 using Client.WPF.ViewModels;
 using System;
@@ -22,8 +23,10 @@ public class LoginCommand : AsyncCommandBase
         _loginViewModel.PropertyChanged += LoginViewModel_PropertyChanged;
     }
 
-    public override bool CanExecute(object parameter) =>
-        _loginViewModel.CanLogin && base.CanExecute(parameter);
+    public override bool CanExecute(object parameter)
+    {
+        return _loginViewModel.CanLogin && base.CanExecute(parameter);
+    }
 
     public override async Task ExecuteAsync(object parameter)
     {
@@ -35,14 +38,14 @@ public class LoginCommand : AsyncCommandBase
 
             _renavigator.Renavigate();
         }
-        //catch (UserNotFoundException)
-        //{
-        //    _loginViewModel.ErrorMessage = "Username does not exist.";
-        //}
-        //catch (InvalidPasswordException)
-        //{
-        //    _loginViewModel.ErrorMessage = "Incorrect password.";
-        //}
+        catch (UserNotFoundException)
+        {
+            _loginViewModel.ErrorMessage = "Username does not exist.";
+        }
+        catch (InvalidPasswordException)
+        {
+            _loginViewModel.ErrorMessage = "Incorrect password.";
+        }
         catch (Exception)
         {
             _loginViewModel.ErrorMessage = "Login failed.";

@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Chipher NoteBook"
     Width="900"
-    Height="650"
+    Height="750"
     mc:Ignorable="d">
     <ContentControl Content="{Binding CurrentViewModel}" />
 </Window>

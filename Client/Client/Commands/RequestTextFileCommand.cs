@@ -26,13 +26,15 @@ public class RequestTextFileCommand : AsyncCommandBase
             return;
         }
 
-        if (string.IsNullOrEmpty(mes.ErrorMessage))
+        if (!string.IsNullOrEmpty(mes.ErrorMessage))
         {
-            _homeViewModel.DecryptBtnIsEnabled = true;
-            _homeViewModel.SessionKey = mes.EncryptedSessionKey;
-            _homeViewModel.EncryptedFileText = mes?.EncryptedFileText;
+            _homeViewModel.EncryptedFileText = mes?.ErrorMessage;
             return;
         }
+
+        _homeViewModel.DecryptBtnIsEnabled = true;
+        _homeViewModel.SessionKey = mes.EncryptedSessionKey;
+        _homeViewModel.EncryptedFileText = mes?.EncryptedFileText;
     }
 
     public override bool CanExecute(object parameter) => base.CanExecute(parameter);

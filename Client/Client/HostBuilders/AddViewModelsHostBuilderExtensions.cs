@@ -33,7 +33,10 @@ public static class AddViewModelsHostBuilderExtensions
     }
 
     private static HomeViewModel CreateHomeViewModel(IServiceProvider services) =>
-        new(services.GetRequiredService<ICypherFileTranspher>());
+        new(
+            services.GetRequiredService<ICypherFileTranspher>(),
+            services.GetRequiredService<IAuthenticator>(),
+            services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>());
 
     private static LoginViewModel CreateLoginViewModel(IServiceProvider services) =>
         new(
@@ -41,9 +44,9 @@ public static class AddViewModelsHostBuilderExtensions
             services.GetRequiredService<ViewModelDelegateRenavigator<HomeViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<RegisterViewModel>>());
 
-    private static RegisterViewModel CreateRegisterViewModel(IServiceProvider services)
-    => new(
-        services.GetRequiredService<IAuthenticator>(),
-        services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
-        services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>());
+    private static RegisterViewModel CreateRegisterViewModel(IServiceProvider services) =>
+        new(
+            services.GetRequiredService<IAuthenticator>(),
+            services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
+            services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>());
 }

@@ -37,24 +37,19 @@ public class RegisterCommand : AsyncCommandBase
                    _registerViewModel.Password,
                    _registerViewModel.ConfirmPassword);
 
-            switch (registrationResult)
+            if (registrationResult == RegistrationResult.Success)
             {
-                case RegistrationResult.Success:
-                    _registerRenavigator.Renavigate();
-                    break;
-                case RegistrationResult.PasswordsDoNotMatch:
-                    _registerViewModel.ErrorMessage = "Password does not match confirm password.";
-                    break;
-                case RegistrationResult.EmailAlreadyExists:
-                    _registerViewModel.ErrorMessage = "An account for this email already exists.";
-                    break;
-                case RegistrationResult.UsernameAlreadyExists:
-                    _registerViewModel.ErrorMessage = "An account for this username already exists.";
-                    break;
-                default:
-                    _registerViewModel.ErrorMessage = "Registration failed.";
-                    break;
+                _registerRenavigator.Renavigate();
+                return;
             }
+
+            _registerViewModel.ErrorMessage = registrationResult switch
+            {
+                RegistrationResult.PasswordsDoNotMatch => "Password does not match confirm password.",
+                RegistrationResult.EmailAlreadyExists => "An account for this email already exists.",
+                RegistrationResult.UsernameAlreadyExists => "An account for this username already exists.",
+                _ => "Registration failed.",
+            };
         }
         catch (Exception)
         {

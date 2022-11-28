@@ -20,7 +20,7 @@ public static class AddServicesHostBuilderExtensions
 
             services.AddHttpClient<ICypherFileTranspher, CypherFileTranspher>(c =>
             {
-                c.BaseAddress = new Uri(@"https://localhost:44341/CipherText");
+                c.BaseAddress = new Uri(@"https://localhost:44341");
             });
 
             services.AddSingleton<IAuthenticatorService, AuthenticatorService>();

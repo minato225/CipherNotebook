@@ -1,6 +1,8 @@
 ﻿using System.Windows.Input;
 using Client.WPF.Commands;
 using Client.WPF.Services.CipherService;
+using Client.WPF.State.Authenticators;
+using Client.WPF.State.Navigators;
 
 namespace Client.WPF.ViewModels;
 
@@ -9,17 +11,19 @@ public class HomeViewModel : BaseViewModel
     public ICommand GenerateOpenKeyCommand { get; }
     public ICommand RequestTextFileCommand { get; }
     public ICommand DecryptRequestCommand { get; }
+    public ICommand LogOutCommand { get; }
 
     public readonly ICypherFileTranspher _cypherFileTranspher;
     public string SessionKey;
 
-    public HomeViewModel(ICypherFileTranspher cypherFileTranspher)
+    public HomeViewModel(ICypherFileTranspher cypherFileTranspher, IAuthenticator authenticator, IRenavigator renavigator)
     {
         _cypherFileTranspher = cypherFileTranspher;
 
         GenerateOpenKeyCommand = new GenerateOpenKeyCommand(this, cypherFileTranspher);
         RequestTextFileCommand = new RequestTextFileCommand(this, cypherFileTranspher);
         DecryptRequestCommand = new DecryptRequestCommand(this, cypherFileTranspher);
+        LogOutCommand = new LogOutCommand(authenticator, renavigator);
     }
 
     #region Props

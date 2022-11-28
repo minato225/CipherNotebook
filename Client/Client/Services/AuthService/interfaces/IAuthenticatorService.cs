@@ -11,7 +11,8 @@ public interface IAuthenticatorService
 
 public enum RegistrationResult
 {
-    Success, Failure,
+    Success, 
+    Failure,
     PasswordsDoNotMatch,
     EmailAlreadyExists,
     UsernameAlreadyExists

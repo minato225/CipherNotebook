@@ -13,8 +13,5 @@ public class ViewModelDelegateRenavigator<TViewModel> : IRenavigator where TView
         _createViewModel = createViewModel;
     }
 
-    public void Renavigate()
-    {
-        _navigator.CurrentViewModel = _createViewModel();
-    }
+    public void Renavigate() => _navigator.CurrentViewModel = _createViewModel();
 }

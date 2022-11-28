@@ -8,11 +8,24 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
             <RowDefinition Height="3*" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0">
+        <Button
+            Grid.Row="0"
+            Width="100"
+            Height="40"
+            VerticalAlignment="Center"
+            Command="{Binding LogOutCommand}">
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="20"
+                Text="Log Out" />
+        </Button>
+        <DockPanel Grid.Row="1">
             <Button
                 x:Name="GenRsaBtn"
                 Margin="10"
@@ -38,9 +51,8 @@
         </DockPanel>
         <StackPanel
             x:Name="EnterFileNamePanel"
-            Grid.Row="1"
-            Margin="20,20,20,0"
-            IsEnabled="False">
+            Grid.Row="2"
+            Margin="20,20,20,0">
             <TextBlock FontSize="20" Text="Enter File Name (0 - 7)" />
             <TextBox
                 x:Name="FileNameTextBox"
@@ -55,7 +67,7 @@
                 Command="{Binding RequestTextFileCommand}"
                 Content="Ok" />
         </StackPanel>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4*" />
                 <ColumnDefinition />

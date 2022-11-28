@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Client.WPF.Services.AuthService.interfaces;
 using Microsoft.AspNetCore.Identity;
+using Client.WPF.Exceptions;
 
 namespace Client.WPF.Services.AuthService;
 
@@ -21,16 +22,16 @@ public class AuthenticatorService : IAuthenticatorService
     {
         var storedAccount = await _accountService.GetByUsername(username);
 
-        if (storedAccount == null)
+        if (storedAccount is null)
         {
-            throw new Exception(username);
+            throw new UserNotFoundException(username);
         }
 
         var passwordResult = _passwordHasher.VerifyHashedPassword(storedAccount, storedAccount.AccountHolder.PasswordHash, password);
 
         if (passwordResult != PasswordVerificationResult.Success)
         {
-            throw new ArgumentException(username, password);
+            throw new InvalidPasswordException(username, password);
         }
 
         return storedAccount;

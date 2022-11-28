@@ -25,14 +25,14 @@ public class CypherFileTranspher : ICypherFileTranspher
 
         try
         {
-            await _httpClient.PostAsJsonAsync($@"/GetOpenRsaKey", openKey);
+            var r = await _httpClient.PostAsJsonAsync(@"CipherText/GetOpenRsaKey", openKey);
         }
         catch (Exception)
         {
-            return await Task.FromResult("Bad Request");
+            return "Bad Request";
         }
 
-        return await Task.FromResult(openKey);
+        return openKey;
     }
 
     public async Task<Message> RequestFile(string textFile)
@@ -41,7 +41,7 @@ public class CypherFileTranspher : ICypherFileTranspher
         try
         {
             var fileName = $"{textFile}.txt";
-            var res = await _httpClient.GetFromJsonAsync<Message>($@"/GetFileText?fileName={fileName}");
+            var res = await _httpClient.GetFromJsonAsync<Message>($@"CipherText/GetFileText?fileName={fileName}");
             response = res;
         }
         catch (Exception er)

@@ -14,7 +14,8 @@ public class LoginViewModel : BaseViewModel
         set
         {
             _userName = value;
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(UserName));
+            OnPropertyChanged(nameof(CanLogin));
         }
     }
 
@@ -28,7 +29,7 @@ public class LoginViewModel : BaseViewModel
         set
         {
             _password = value;
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(Password));
             OnPropertyChanged(nameof(CanLogin));
         }
     }

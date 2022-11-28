@@ -17,21 +17,8 @@ public class Authenticator : IAuthenticator
 
     public event Action StateChanged;
 
-    public async Task<bool> Login(string username, string password)
-    {
-        var succes = true;
-
-        try
-        {
-            CurrentAccount = await _authenticatorService.Login(username, password);
-        }
-        catch (Exception)
-        {
-            succes = false;
-        }
-
-        return succes;
-    }
+    public async Task Login(string username, string password) => 
+        CurrentAccount = await _authenticatorService.Login(username, password);
 
     public void Logout() => CurrentAccount = null;
 
