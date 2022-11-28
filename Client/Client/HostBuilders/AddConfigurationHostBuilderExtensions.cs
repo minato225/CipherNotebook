@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 
-namespace Client.HostBuilders;
+namespace Client.WPF.HostBuilders;
 
 public static class AddConfigurationHostBuilderExtensions
 {

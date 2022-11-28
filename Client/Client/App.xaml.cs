@@ -1,4 +1,6 @@
-﻿using Client.HostBuilders;
+﻿using Client.DataBase;
+using Client.WPF.HostBuilders;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
@@ -27,13 +29,8 @@ public partial class App : Application
     {
         _host.Start();
 
-        var contextFactory = _host.Services.GetRequiredService<DbContextFactory>();
-        using var context = contextFactory.CreateDbContext();
-
-        context.Database.Migrate();
-
-        var window = _host.Services.GetRequiredService<MainWindow>();
-        window.Show();
+        DbMigrate();
+        ShowMainWindow();
 
         base.OnStartup(e);
     }
@@ -45,4 +42,13 @@ public partial class App : Application
 
         base.OnExit(e);
     }
+
+    private void DbMigrate()
+    {
+        using var context = _host.Services.GetRequiredService<ClientDbContextFactory>().CreateDbContext();
+
+        context.Database.Migrate();
+    }
+
+    private void ShowMainWindow() => _host.Services.GetRequiredService<MainWindow>().Show();
 }

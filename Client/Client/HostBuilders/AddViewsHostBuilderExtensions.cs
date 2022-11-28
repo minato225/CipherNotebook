@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Client.ViewModels;
+using Client.WPF.ViewModels;
 
-namespace Client.HostBuilders;
+namespace Client.WPF.HostBuilders;
 
 public static class AddViewsHostBuilderExtensions
 {
     public static IHostBuilder AddViews(this IHostBuilder host) => host
-        .ConfigureServices(services => 
+        .ConfigureServices(services =>
             services.AddSingleton(s => new MainWindow(s.GetRequiredService<MainViewModel>())));
 }

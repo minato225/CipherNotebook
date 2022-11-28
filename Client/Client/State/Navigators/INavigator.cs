@@ -1,8 +1,13 @@
-﻿using Client.ViewModels;
+﻿using Client.WPF.ViewModels;
 using System;
-using System.Windows.Input;
 
-namespace Client.State.Navigators;
+namespace Client.WPF.State.Navigators;
+
+public enum ViewType
+{
+    Login,
+    Home
+}
 
 public interface INavigator
 {

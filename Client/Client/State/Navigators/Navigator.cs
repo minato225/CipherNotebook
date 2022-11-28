@@ -1,25 +1,19 @@
-﻿using Client.Models;
-using Client.ViewModels;
+﻿using Client.WPF.ViewModels;
 using System;
 
-namespace Client.State.Navigators;
+namespace Client.WPF.State.Navigators;
 
-public enum ViewType
-{
-    Login,
-    Home
-}
-
-public class Navigator : ObservableObject, INavigator
+public class Navigator : INavigator
 {
     private BaseViewModel _currentViewModel;
-
-    public BaseViewModel CurrentViewModel {
+    public BaseViewModel CurrentViewModel
+    {
         get => _currentViewModel;
         set
         {
+            _currentViewModel?.Dispose();
+
             _currentViewModel = value;
-            OnPropertyChanged();
             StateChanged?.Invoke();
         }
     }

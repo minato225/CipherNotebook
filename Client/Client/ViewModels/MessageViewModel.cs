@@ -1,4 +1,4 @@
-﻿namespace Client.ViewModels;
+﻿namespace Client.WPF.ViewModels;
 
 public class MessageViewModel : BaseViewModel
 {

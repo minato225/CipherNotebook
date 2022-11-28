@@ -1,6 +1,7 @@
-﻿using Client.State.Navigators;
+﻿using Client.WPF.State.Navigators;
+using Client.WPF.ViewModels;
 
-namespace Client.ViewModels.Factories;
+namespace Client.WPF.ViewModels.Factories;
 
 public interface IViewModelFactory
 {

@@ -1,4 +1,4 @@
-﻿namespace Client.State.Navigators;
+﻿namespace Client.WPF.State.Navigators;
 
 public interface IRenavigator
 {

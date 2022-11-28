@@ -1,27 +1,22 @@
-﻿using Client.Commands;
-using Client.State.Authenticators;
-using Client.State.Navigators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Client.WPF.Commands;
+using Client.WPF.State.Authenticators;
+using Client.WPF.State.Navigators;
 using System.Windows.Input;
 
-namespace Client.ViewModels;
+namespace Client.WPF.ViewModels;
 
 public class LoginViewModel : BaseViewModel
 {
-	private string _userName;
-
-	public string UserName
-	{
-		get => _userName;
-        set { 
-			_userName = value;
-			OnPropertyChanged();
-		}
-	}
+    private string _userName;
+    public string UserName
+    {
+        get => _userName;
+        set
+        {
+            _userName = value;
+            OnPropertyChanged();
+        }
+    }
 
     private string _password;
     public string Password

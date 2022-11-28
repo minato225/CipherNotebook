@@ -2,10 +2,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Client.EntityFramework;
 using System;
+using Client.DataBase;
 
-namespace Client.HostBuilders;
+namespace Client.WPF.HostBuilders;
 
 public static class AddDbContextHostBuilderExtensions
 {
@@ -15,7 +15,7 @@ public static class AddDbContextHostBuilderExtensions
             var connectionString = context.Configuration.GetConnectionString("sqlite");
             Action<DbContextOptionsBuilder> configureDbContext = o => o.UseSqlite(connectionString);
 
-            services.AddDbContext<SimpleTraderDbContext>(configureDbContext);
-            services.AddSingleton<DbContextFactory>(new DbContextFactory(configureDbContext));
+            services.AddDbContext<ClientDataContext>(configureDbContext);
+            services.AddSingleton(new ClientDbContextFactory(configureDbContext));
         });
 }

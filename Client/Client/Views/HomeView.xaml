@@ -1,13 +1,11 @@
 ﻿<UserControl
-    x:Class="Client.Views.HomeView"
+    x:Class="Client.WPF.Views.HomeView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Client.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
     mc:Ignorable="d">
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
@@ -18,7 +16,7 @@
             <Button
                 x:Name="GenRsaBtn"
                 Margin="10"
-                Click="GenOPenKey_ButtonClick"
+                Command="{Binding GenerateOpenKeyCommand}"
                 Content="Generate Open RSA key"
                 DockPanel.Dock="Top"
                 FontSize="20" />
@@ -34,6 +32,7 @@
                     BorderThickness="0"
                     FontSize="15"
                     IsReadOnly="True"
+                    Text="{Binding OpenKey}"
                     TextWrapping="Wrap" />
             </Border>
         </DockPanel>
@@ -46,13 +45,14 @@
             <TextBox
                 x:Name="FileNameTextBox"
                 BorderThickness="2"
-                FontSize="20" />
+                FontSize="20"
+                Text="{Binding FileName}" />
             <Button
                 x:Name="SendBtn"
                 Width="60"
                 Margin="0,10,10,0"
                 HorizontalAlignment="Right"
-                Click="GetFileText_ButtonClick"
+                Command="{Binding RequestTextFileCommand}"
                 Content="Ok" />
         </StackPanel>
         <Grid Grid.Row="2">
@@ -84,20 +84,19 @@
                             BorderThickness="0"
                             FontSize="20"
                             IsReadOnly="True"
-                            Text="Empty..."
+                            Text="{Binding EncryptedFileText}"
                             TextWrapping="Wrap" />
                     </ScrollViewer>
-
                 </Border>
             </DockPanel>
             <Button
                 x:Name="DecryptBtn"
                 Grid.Column="1"
                 Height="40"
-                Click="Decrypt_ButtonClick"
+                Command="{Binding DecryptRequestCommand}"
                 Content="-&gt;"
                 FontSize="30"
-                IsEnabled="False" />
+                IsEnabled="{Binding DecryptBtnIsEnabled}" />
             <DockPanel Grid.Column="2">
                 <TextBlock
                     HorizontalAlignment="Center"
@@ -120,7 +119,7 @@
                             BorderThickness="0"
                             FontSize="20"
                             IsReadOnly="True"
-                            Text="Empty..."
+                            Text="{Binding DecryptedFileText}"
                             TextWrapping="Wrap" />
                     </ScrollViewer>
                 </Border>

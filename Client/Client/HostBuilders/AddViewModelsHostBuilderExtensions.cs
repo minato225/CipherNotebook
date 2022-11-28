@@ -1,12 +1,13 @@
-﻿using Client.State.Authenticators;
-using Client.State.Navigators;
-using Client.ViewModels;
-using Client.ViewModels.Factories;
+﻿using Client.WPF.Services.CipherService;
+using Client.WPF.State.Authenticators;
+using Client.WPF.State.Navigators;
+using Client.WPF.ViewModels;
+using Client.WPF.ViewModels.Factories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 
-namespace Client.HostBuilders;
+namespace Client.WPF.HostBuilders;
 
 public static class AddViewModelsHostBuilderExtensions
 {
@@ -32,7 +33,7 @@ public static class AddViewModelsHostBuilderExtensions
     }
 
     private static HomeViewModel CreateHomeViewModel(IServiceProvider services) =>
-        new();
+        new(services.GetRequiredService<ICypherFileTranspher>());
 
     private static LoginViewModel CreateLoginViewModel(IServiceProvider services) =>
         new(
@@ -42,7 +43,7 @@ public static class AddViewModelsHostBuilderExtensions
 
     private static RegisterViewModel CreateRegisterViewModel(IServiceProvider services)
     => new(
-        services.GetRequiredService<IAuthenticator>(), 
-        services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(), 
+        services.GetRequiredService<IAuthenticator>(),
+        services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
         services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>());
 }

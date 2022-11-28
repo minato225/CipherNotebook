@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Client.Commands;
+namespace Client.WPF.Commands;
 
 public abstract class AsyncCommandBase : ICommand
 {

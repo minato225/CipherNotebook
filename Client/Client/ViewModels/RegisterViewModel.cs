@@ -1,11 +1,13 @@
-﻿using Client.State.Authenticators;
-using Client.State.Navigators;
+﻿using Client.WPF.Commands;
+using Client.WPF.State.Authenticators;
+using Client.WPF.State.Navigators;
 using System.Windows.Input;
 
-namespace Client.ViewModels;
+namespace Client.WPF.ViewModels;
 
 public class RegisterViewModel : BaseViewModel
 {
+    #region Prop
     private string _email;
     public string Email
     {
@@ -53,6 +55,7 @@ public class RegisterViewModel : BaseViewModel
             OnPropertyChanged(nameof(CanRegister));
         }
     }
+    #endregion
 
     public bool CanRegister => !string.IsNullOrEmpty(Email) &&
         !string.IsNullOrEmpty(Username) &&

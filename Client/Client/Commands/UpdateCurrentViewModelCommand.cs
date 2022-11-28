@@ -1,9 +1,9 @@
-﻿using Client.State.Navigators;
-using Client.ViewModels.Factories;
+﻿using Client.WPF.State.Navigators;
+using Client.WPF.ViewModels.Factories;
 using System;
 using System.Windows.Input;
 
-namespace Client.Commands;
+namespace Client.WPF.Commands;
 
 public class UpdateCurrentViewModelCommand : ICommand
 {

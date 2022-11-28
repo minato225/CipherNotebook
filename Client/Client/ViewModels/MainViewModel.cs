@@ -1,24 +1,44 @@
-﻿using Client.Commands;
-using Client.State.Authenticators;
-using Client.State.Navigators;
+﻿using Client.WPF.Commands;
+using Client.WPF.State.Authenticators;
+using Client.WPF.State.Navigators;
+using Client.WPF.ViewModels.Factories;
 using System.Windows.Input;
 
-namespace Client.ViewModels;
+namespace Client.WPF.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
-    public INavigator Navigator { get; set; }
-    public IAuthenticator Authenticator { get; set; }
+    private readonly IViewModelFactory _viewModelFactory;
+    private readonly INavigator _navigator;
+    private readonly IAuthenticator _authenticator;
 
+    public bool IsLoggedIn => _authenticator.IsLoggined;
+    public BaseViewModel CurrentViewModel => _navigator.CurrentViewModel;
 
-    ICommand UpdateCurrentViewModelCommand { get; }
+    public ICommand UpdateCurrentViewModelCommand { get; }
 
-    public MainViewModel(INavigator navigator, IAuthenticator authenticator)
+    public MainViewModel(INavigator navigator, IViewModelFactory viewModelFactory, IAuthenticator authenticator)
     {
-        Navigator = navigator;
-        Authenticator = authenticator;
+        _navigator = navigator;
+        _viewModelFactory = viewModelFactory;
+        _authenticator = authenticator;
 
-        UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator);
+        _navigator.StateChanged += Navigator_StateChanged;
+        _authenticator.StateChanged += Authenticator_StateChanged;
+
+        UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, _viewModelFactory);
         UpdateCurrentViewModelCommand.Execute(ViewType.Login);
+    }
+
+    private void Authenticator_StateChanged() => OnPropertyChanged(nameof(IsLoggedIn));
+
+    private void Navigator_StateChanged() => OnPropertyChanged(nameof(CurrentViewModel));
+
+    public override void Dispose()
+    {
+        _navigator.StateChanged -= Navigator_StateChanged;
+        _authenticator.StateChanged -= Authenticator_StateChanged;
+
+        base.Dispose();
     }
 }

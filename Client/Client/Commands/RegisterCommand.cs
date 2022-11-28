@@ -1,12 +1,12 @@
-﻿using Client.Services.AuthService;
-using Client.State.Authenticators;
-using Client.State.Navigators;
-using Client.ViewModels;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Threading.Tasks;
 using System;
+using Client.WPF.State.Authenticators;
+using Client.WPF.ViewModels;
+using Client.WPF.State.Navigators;
+using Client.WPF.Services.AuthService.interfaces;
 
-namespace Client.Commands;
+namespace Client.WPF.Commands;
 
 public class RegisterCommand : AsyncCommandBase
 {

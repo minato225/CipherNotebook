@@ -1,14 +1,14 @@
-﻿using Client.State.Navigators;
+﻿using Client.WPF.State.Navigators;
 using System;
 
-namespace Client.ViewModels.Factories;
+namespace Client.WPF.ViewModels.Factories;
 
-internal class ViewModelFactory : IViewModelFactory
+public class ViewModelFactory : IViewModelFactory
 {
     private readonly CreateViewModel<HomeViewModel> _createHomeViewModel;
     private readonly CreateViewModel<LoginViewModel> _createLoginViewModel;
 
-    public ViewModelFactory(CreateViewModel<HomeViewModel> createHomeViewModel,CreateViewModel<LoginViewModel> createLoginViewModel)
+    public ViewModelFactory(CreateViewModel<HomeViewModel> createHomeViewModel, CreateViewModel<LoginViewModel> createLoginViewModel)
     {
         _createHomeViewModel = createHomeViewModel;
         _createLoginViewModel = createLoginViewModel;
@@ -18,6 +18,6 @@ internal class ViewModelFactory : IViewModelFactory
     {
         ViewType.Login => _createLoginViewModel(),
         ViewType.Home => _createHomeViewModel(),
-        _ => throw new ArgumentException("The ViewType does not have a ViewModel.", "viewType"),
+        _ => throw new ArgumentException("The ViewType does not have a ViewModel.", nameof(viewType)),
     };
 }

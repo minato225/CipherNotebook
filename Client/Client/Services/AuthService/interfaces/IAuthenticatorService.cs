@@ -1,7 +1,7 @@
-﻿using Client.Models;
+﻿using Client.DataBase.Models;
 using System.Threading.Tasks;
 
-namespace Client.Services.AuthService;
+namespace Client.WPF.Services.AuthService.interfaces;
 
 public interface IAuthenticatorService
 {
@@ -11,5 +11,8 @@ public interface IAuthenticatorService
 
 public enum RegistrationResult
 {
-    Success, Failure
+    Success, Failure,
+    PasswordsDoNotMatch,
+    EmailAlreadyExists,
+    UsernameAlreadyExists
 }

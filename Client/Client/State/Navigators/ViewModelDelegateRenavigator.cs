@@ -1,21 +1,20 @@
-﻿using Client.ViewModels;
+﻿using Client.WPF.ViewModels;
 
-namespace Client.State.Navigators
+namespace Client.WPF.State.Navigators;
+
+public class ViewModelDelegateRenavigator<TViewModel> : IRenavigator where TViewModel : BaseViewModel
 {
-    public class ViewModelDelegateRenavigator<TViewModel> : IRenavigator where TViewModel : BaseViewModel
+    private readonly INavigator _navigator;
+    private readonly CreateViewModel<TViewModel> _createViewModel;
+
+    public ViewModelDelegateRenavigator(INavigator navigator, CreateViewModel<TViewModel> createViewModel)
     {
-        private readonly INavigator _navigator;
-        private readonly CreateViewModel<TViewModel> _createViewModel;
+        _navigator = navigator;
+        _createViewModel = createViewModel;
+    }
 
-        public ViewModelDelegateRenavigator(INavigator navigator, CreateViewModel<TViewModel> createViewModel)
-        {
-            _navigator = navigator;
-            _createViewModel = createViewModel;
-        }
-
-        public void Renavigate()
-        {
-            _navigator.CurrentViewModel = _createViewModel();
-        }
+    public void Renavigate()
+    {
+        _navigator.CurrentViewModel = _createViewModel();
     }
 }
