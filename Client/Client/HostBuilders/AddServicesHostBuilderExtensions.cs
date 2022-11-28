@@ -6,6 +6,8 @@ using Client.WPF.Services.CipherService;
 using Client.WPF.Services.AuthService.interfaces;
 using Client.DataBase.Models;
 using Microsoft.AspNetCore.Identity;
+using Client.WPF.State.Authenticators;
+using Client.WPF.State.Navigators;
 
 namespace Client.WPF.HostBuilders;
 
@@ -24,5 +26,8 @@ public static class AddServicesHostBuilderExtensions
             services.AddSingleton<IAuthenticatorService, AuthenticatorService>();
             services.AddSingleton<IDataService<Account>, AccountDataService>();
             services.AddSingleton<IAccountService, AccountDataService>();
+
+            services.AddSingleton<INavigator, Navigator>();
+            services.AddSingleton<IAuthenticator, Authenticator>();
         });
 }

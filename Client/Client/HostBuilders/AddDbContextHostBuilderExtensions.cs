@@ -13,7 +13,7 @@ public static class AddDbContextHostBuilderExtensions
         .ConfigureServices((context, services) =>
         {
             var connectionString = context.Configuration.GetConnectionString("sqlite");
-            Action<DbContextOptionsBuilder> configureDbContext = o => o.UseSqlite(connectionString);
+            void configureDbContext(DbContextOptionsBuilder o) => o.UseSqlite(connectionString);
 
             services.AddDbContext<ClientDataContext>(configureDbContext);
             services.AddSingleton(new ClientDbContextFactory(configureDbContext));

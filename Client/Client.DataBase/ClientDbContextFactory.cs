@@ -1,21 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Options;
 
 namespace Client.DataBase;
 
-public class ClientDbContextFactory
+public class ClientDbContextFactory : IDesignTimeDbContextFactory<ClientDataContext>
 {
     private readonly Action<DbContextOptionsBuilder> _configureDbContext;
 
     public ClientDbContextFactory(Action<DbContextOptionsBuilder> configureDbContext) => 
         _configureDbContext = configureDbContext;
 
-    public ClientDataContext CreateDbContext()
+    public ClientDbContextFactory()
     {
-        var options = new DbContextOptionsBuilder<ClientDataContext>();
+    }
 
-        _configureDbContext(options);
+    public ClientDataContext CreateDbContext(string[] args = default)
+    {
+        var optionsBuilder = new DbContextOptionsBuilder<ClientDataContext>();
+        _configureDbContext(optionsBuilder);
 
-        return new ClientDataContext(options.Options);
+        //optionsBuilder.UseSqlite("Data Source=CypherNoteBook.db");
+
+        return new ClientDataContext(optionsBuilder.Options);
     }
 }

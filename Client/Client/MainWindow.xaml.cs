@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Client;
+namespace Client.WPF;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml

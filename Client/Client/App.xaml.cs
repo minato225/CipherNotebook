@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
 
-namespace Client;
+namespace Client.WPF;
 
 /// <summary>
 /// Interaction logic for App.xaml
@@ -23,7 +23,8 @@ public partial class App : Application
         .AddConfiguration()
         .AddDbContext()
         .AddServices()
-        .AddViewModels();
+        .AddViewModels()
+        .AddViews();
 
     protected override void OnStartup(StartupEventArgs e)
     {
