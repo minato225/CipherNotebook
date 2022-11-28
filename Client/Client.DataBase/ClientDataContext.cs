@@ -1,4 +1,4 @@
-﻿using Client.DataBase.Models;
+﻿using Client.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Client.DataBase;
