@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace CipherNoteBook.Server.Service;
+namespace CipherNoteBook.Server.Services.SecurityServices;
 
 public class TextService : ITextService
 {

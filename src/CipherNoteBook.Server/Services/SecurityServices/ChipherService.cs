@@ -1,6 +1,6 @@
 ﻿using NETCore.Encrypt;
 
-namespace CipherNoteBook.Server.Service;
+namespace CipherNoteBook.Server.Services.SecurityServices;
 
 public class ChipherService : IChipherService
 {

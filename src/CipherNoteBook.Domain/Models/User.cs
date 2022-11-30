@@ -7,4 +7,6 @@ public class User : DomainObject
     public string PasswordHash { get; set; }
     public string AuthToken { get; set; }
     public DateTime DatedJoined { get; set; }
+
+    public List<RefreshToken> RefreshTokens { get; set; }
 }

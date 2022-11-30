@@ -3,6 +3,7 @@ using System;
 using CipherNoteBook.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CipherNoteBook.DataBase.Migrations
 {
     [DbContext(typeof(ClientDataContext))]
-    partial class ClientDataContextModelSnapshot : ModelSnapshot
+    [Migration("20221130214842_removeRevoked")]
+    partial class removeRevoked
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");

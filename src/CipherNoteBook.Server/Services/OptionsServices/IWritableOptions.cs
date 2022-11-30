@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 
-namespace CipherNoteBook.Server.Service;
+namespace CipherNoteBook.Server.Services.OptionsServices;
 
 public interface IWritableOptions<out T> : IOptions<T> where T : class, new()
 {

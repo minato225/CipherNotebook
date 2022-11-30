@@ -19,8 +19,6 @@ public partial class App : Application
     public static IHostBuilder CreateHostBuilder(string[]? args = null) =>
         Host
         .CreateDefaultBuilder(args)
-        .AddConfiguration()
-        .AddDbContext()
         .AddServices()
         .AddViewModels()
         .AddViews();

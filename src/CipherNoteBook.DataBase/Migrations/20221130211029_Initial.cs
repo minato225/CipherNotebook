@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Client.DataBase.Migrations
+namespace CipherNoteBook.DataBase.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,6 +20,7 @@ namespace Client.DataBase.Migrations
                     Email = table.Column<string>(type: "TEXT", nullable: false),
                     Username = table.Column<string>(type: "TEXT", nullable: false),
                     PasswordHash = table.Column<string>(type: "TEXT", nullable: false),
+                    AuthToken = table.Column<string>(type: "TEXT", nullable: false),
                     DatedJoined = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -41,6 +42,33 @@ namespace Client.DataBase.Migrations
                     table.ForeignKey(
                         name: "FK_Accounts_Users_AccountHolderId",
                         column: x => x.AccountHolderId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RefreshToken",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Token = table.Column<string>(type: "TEXT", nullable: false),
+                    Expires = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatedByIp = table.Column<string>(type: "TEXT", nullable: false),
+                    Revoked = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    RevokedByIp = table.Column<string>(type: "TEXT", nullable: false),
+                    ReplacedByToken = table.Column<string>(type: "TEXT", nullable: false),
+                    ReasonRevoked = table.Column<string>(type: "TEXT", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RefreshToken", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RefreshToken_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -75,6 +103,11 @@ namespace Client.DataBase.Migrations
                 name: "IX_FilesInfo_AccountId",
                 table: "FilesInfo",
                 column: "AccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RefreshToken_UserId",
+                table: "RefreshToken",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -82,6 +115,9 @@ namespace Client.DataBase.Migrations
         {
             migrationBuilder.DropTable(
                 name: "FilesInfo");
+
+            migrationBuilder.DropTable(
+                name: "RefreshToken");
 
             migrationBuilder.DropTable(
                 name: "Accounts");

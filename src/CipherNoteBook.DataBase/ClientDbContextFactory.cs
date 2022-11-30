@@ -19,9 +19,9 @@ public class ClientDbContextFactory : IDesignTimeDbContextFactory<ClientDataCont
     public ClientDataContext CreateDbContext(string[] args = default)
     {
         var optionsBuilder = new DbContextOptionsBuilder<ClientDataContext>();
-        _configureDbContext(optionsBuilder);
+        //_configureDbContext(optionsBuilder);
 
-        //optionsBuilder.UseSqlite("Data Source=CypherNoteBook.db");
+        optionsBuilder.UseSqlite("Data Source=CypherNoteBook.db");
 
         return new ClientDataContext(optionsBuilder.Options);
     }

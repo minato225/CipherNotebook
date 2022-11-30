@@ -8,9 +8,18 @@
 
   <ItemGroup>
 	<PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
 	<PackageReference Include="NETCore.Encrypt" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CipherNoteBook.DataBase\CipherNoteBook.DataBase.csproj" />
+    <ProjectReference Include="..\CipherNoteBook.Domain\CipherNoteBook.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

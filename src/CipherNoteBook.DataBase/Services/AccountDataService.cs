@@ -39,12 +39,11 @@ public class AccountDataService : IAccountService
         return entities;
     }
 
-    public async Task<Account> GetByEmail(string email)
+    public async Task<User> GetByEmail(string email)
     {
         using var context = _contextFactory.CreateDbContext();
-        var accounts = await context.Accounts
-            .Include(a => a.AccountHolder)
-            .FirstOrDefaultAsync(a => a.AccountHolder.Email == email);
+        var accounts = await context.Users
+            .FirstOrDefaultAsync(a => a.Email == email);
 
         return accounts;
     }

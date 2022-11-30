@@ -9,7 +9,6 @@ public sealed class ClientDataContext : DbContext
     public DbSet<Account> Accounts { get; set; }
 
     public ClientDataContext(DbContextOptions<ClientDataContext> options)
-        : base(options)
-    {
-    }
+        : base(options) =>
+        Database.EnsureCreated();
 }

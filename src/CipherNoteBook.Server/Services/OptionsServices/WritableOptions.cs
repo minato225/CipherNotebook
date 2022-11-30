@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using IHostEnv = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
-namespace CipherNoteBook.Server.Service;
+namespace CipherNoteBook.Server.Services.OptionsServices;
 
 public class WritableOptions<T> : IWritableOptions<T> where T : class, new()
 {

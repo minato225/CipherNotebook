@@ -1,4 +1,4 @@
-﻿namespace CipherNoteBook.Server.Service;
+﻿namespace CipherNoteBook.Server.Services.SecurityServices;
 
 public interface ITextService
 {

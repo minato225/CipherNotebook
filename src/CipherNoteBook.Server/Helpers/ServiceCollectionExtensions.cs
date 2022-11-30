@@ -1,16 +1,17 @@
-﻿using CipherNoteBook.Server.Service;
+﻿using CipherNoteBook.Server.Services;
+using CipherNoteBook.Server.Services.OptionsServices;
 using Microsoft.Extensions.Options;
 
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
-namespace CipherNoteBook.Server.Helper;
+namespace CipherNoteBook.Server.Helpers;
 
 public static class ServiceCollectionExtensions
 {
     [Obsolete]
     public static void ConfigureWritable<T>(
-        this IServiceCollection services, 
-        IConfigurationSection section, 
+        this IServiceCollection services,
+        IConfigurationSection section,
         string file = "appsettings.json") where T : class, new()
     {
         services.Configure<T>(section);

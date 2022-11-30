@@ -1,82 +1,60 @@
-﻿using Microsoft.AspNetCore.Identity;
-using CipherNoteBook.Domain.Services.AuthService.interfaces;
+﻿using CipherNoteBook.Domain.Services.AuthService.interfaces;
 using CipherNoteBook.Domain.Models;
 using CipherNoteBook.Domain.Exceptions;
+using System.Net.Http.Json;
 
 namespace CipherNoteBook.Domain.Services.AuthService;
 
 public class AuthenticatorService : IAuthenticatorService
 {
-    private readonly IAccountService _accountService;
-    private readonly IPasswordHasher<Account> _passwordHasher;
+    private readonly HttpClient _httpClient;
 
-    public AuthenticatorService(IAccountService accountService, IPasswordHasher<Account> passwordHasher)
-    {
-        _accountService = accountService;
-        _passwordHasher = passwordHasher;
-    }
+    public AuthenticatorService(HttpClient httpClient) => 
+        _httpClient = httpClient;
 
     public async Task<Account> Login(string username, string password)
     {
-        var storedAccount = await _accountService.GetByUsername(username);
+        var model = new LoginRequestModel { Email = username, Password = password };
+        var response = await _httpClient.PostAsJsonAsync("/api/Auth/login", model);
+        var req = await response.Content.ReadFromJsonAsync<AuthenticateResponse>();
 
-        if (storedAccount is null)
+        if (req?.ErrorMessage == "UserNotFoundException")
         {
             throw new UserNotFoundException(username);
         }
 
-        var passwordResult = _passwordHasher.VerifyHashedPassword(storedAccount, storedAccount.AccountHolder.PasswordHash, password);
-
-        if (passwordResult != PasswordVerificationResult.Success)
+        if (req?.ErrorMessage == "InvalidPasswordException")
         {
             throw new InvalidPasswordException(username, password);
         }
 
-        return storedAccount;
+        return new Account
+        {
+            AccountHolder = new User
+            {
+                Email = req.Email,
+                Username = username
+            }
+        };
     }
 
     public async Task<RegistrationResult> Register(string email, string username, string password, string confirmPassword)
     {
-        var result = RegistrationResult.Success;
-
         if (password != confirmPassword)
         {
-            result = RegistrationResult.PasswordsDoNotMatch;
+            return RegistrationResult.PasswordsDoNotMatch;
         }
 
-        var emailAccount = await _accountService.GetByEmail(email);
-        if (emailAccount != null)
+        var user = await _httpClient.GetFromJsonAsync<User>($"/api/Auth/EmailUser?email={email}");
+        if (user?.Username is not null)
         {
-            result = RegistrationResult.EmailAlreadyExists;
+            return RegistrationResult.EmailAlreadyExists;
         }
 
-        var usernameAccount = await _accountService.GetByUsername(username);
-        if (usernameAccount != null)
-        {
-            result = RegistrationResult.UsernameAlreadyExists;
-        }
+        var model = new UserRequest { Email = email, Password = password, UserName = username };
+        var res = await _httpClient.PostAsJsonAsync("/api/Auth/register", model);
+        var req = await res.Content.ReadFromJsonAsync<AuthenticateResponse>();
 
-        if (result == RegistrationResult.Success)
-        {
-            string hashedPassword = _passwordHasher.HashPassword(usernameAccount, password);
-
-            var user = new User
-            {
-                Email = email,
-                Username = username,
-                PasswordHash = hashedPassword,
-                AuthToken = "test",
-                DatedJoined = DateTime.Now
-            };
-
-            var account = new Account
-            {
-                AccountHolder = user
-            };
-
-            await _accountService.Create(account);
-        }
-
-        return result;
+        return RegistrationResult.Success;
     }
 }

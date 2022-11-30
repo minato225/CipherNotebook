@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Client.DataBase.Migrations
+namespace CipherNoteBook.DataBase.Migrations
 {
     [DbContext(typeof(ClientDataContext))]
-    [Migration("20221130102221_AddToken")]
-    partial class AddToken
+    [Migration("20221130214413_AddNulls2")]
+    partial class AddNulls2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,7 +20,7 @@ namespace Client.DataBase.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
 
-            modelBuilder.Entity("Client.Domain.Models.Account", b =>
+            modelBuilder.Entity("CipherNoteBook.Domain.Models.Account", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,7 +36,7 @@ namespace Client.DataBase.Migrations
                     b.ToTable("Accounts");
                 });
 
-            modelBuilder.Entity("Client.Domain.Models.FilesInfo", b =>
+            modelBuilder.Entity("CipherNoteBook.Domain.Models.FilesInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,7 +60,7 @@ namespace Client.DataBase.Migrations
                     b.ToTable("FilesInfo");
                 });
 
-            modelBuilder.Entity("Client.Domain.Models.User", b =>
+            modelBuilder.Entity("CipherNoteBook.Domain.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -90,9 +90,9 @@ namespace Client.DataBase.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Client.Domain.Models.Account", b =>
+            modelBuilder.Entity("CipherNoteBook.Domain.Models.Account", b =>
                 {
-                    b.HasOne("Client.Domain.Models.User", "AccountHolder")
+                    b.HasOne("CipherNoteBook.Domain.Models.User", "AccountHolder")
                         .WithMany()
                         .HasForeignKey("AccountHolderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -101,14 +101,63 @@ namespace Client.DataBase.Migrations
                     b.Navigation("AccountHolder");
                 });
 
-            modelBuilder.Entity("Client.Domain.Models.FilesInfo", b =>
+            modelBuilder.Entity("CipherNoteBook.Domain.Models.FilesInfo", b =>
                 {
-                    b.HasOne("Client.Domain.Models.Account", null)
+                    b.HasOne("CipherNoteBook.Domain.Models.Account", null)
                         .WithMany("FilesInfo")
                         .HasForeignKey("AccountId");
                 });
 
-            modelBuilder.Entity("Client.Domain.Models.Account", b =>
+            modelBuilder.Entity("CipherNoteBook.Domain.Models.User", b =>
+                {
+                    b.OwnsMany("CipherNoteBook.Domain.Models.RefreshToken", "RefreshTokens", b1 =>
+                        {
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("INTEGER");
+
+                            b1.Property<DateTime>("Created")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("CreatedByIp")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<DateTime>("Expires")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("ReasonRevoked")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("ReplacedByToken")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<DateTime?>("Revoked")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("RevokedByIp")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Token")
+                                .IsRequired()
+                                .HasColumnType("TEXT");
+
+                            b1.Property<int>("UserId")
+                                .HasColumnType("INTEGER");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("UserId");
+
+                            b1.ToTable("RefreshToken");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.Navigation("RefreshTokens");
+                });
+
+            modelBuilder.Entity("CipherNoteBook.Domain.Models.Account", b =>
                 {
                     b.Navigation("FilesInfo");
                 });

@@ -1,6 +1,4 @@
-﻿using CipherNoteBook.DataBase;
-using CipherNoteBook.WPF.HostBuilders;
-using Microsoft.EntityFrameworkCore;
+﻿using CipherNoteBook.WPF.HostBuilders;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
@@ -20,8 +18,6 @@ public partial class App : Application
     public static IHostBuilder CreateHostBuilder(string[]? args = null) =>
         Host
         .CreateDefaultBuilder(args)
-        .AddConfiguration()
-        .AddDbContext()
         .AddServices()
         .AddViewModels()
         .AddViews();
@@ -30,7 +26,6 @@ public partial class App : Application
     {
         _host.Start();
 
-        DbMigrate();
         ShowMainWindow();
 
         base.OnStartup(e);
@@ -42,13 +37,6 @@ public partial class App : Application
         _host.Dispose();
 
         base.OnExit(e);
-    }
-
-    private void DbMigrate()
-    {
-        using var context = _host.Services.GetRequiredService<ClientDbContextFactory>().CreateDbContext();
-
-        context.Database.Migrate();
     }
 
     private void ShowMainWindow() => _host.Services.GetRequiredService<MainWindow>().Show();
