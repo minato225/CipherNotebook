@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\home-bg.png" />
     <None Remove="assets\login-background.png" />
   </ItemGroup>
 
@@ -22,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="assets\home-bg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="assets\login-background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

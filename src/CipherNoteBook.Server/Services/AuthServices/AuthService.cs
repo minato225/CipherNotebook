@@ -25,7 +25,7 @@ public class AuthService : IAuthService
         var user = _accountService.GetByEmail(model.Email).Result;
 
         if (user is null || !BCryptNet.Verify(model.Password, user.PasswordHash))
-            throw new Exception("Username or password is incorrect");
+            return new AuthenticateResponse { ErrorMessage = "UserNotFoundException" };
 
         var jwtToken = _jwtUtils.GenerateJwtToken(user);
         var refreshToken = _jwtUtils.GenerateRefreshToken(ipAddress);

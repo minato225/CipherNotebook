@@ -6,7 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="OTP Service"
     Width="800"
-    Height="500"
+    Height="550"
+    ResizeMode="NoResize"
     mc:Ignorable="d">
     <ContentControl Content="{Binding CurrentViewModel}" />
 </Window>

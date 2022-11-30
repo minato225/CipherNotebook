@@ -26,7 +26,7 @@ public class HomeViewModel : BaseViewModel
 
     public string UserName => _authenticator.CurrentAccount.AccountHolder.Username;
 
-    private string _otpPinCode;
+    private string _otpPinCode = "123456";
     public string OtpPinCode
     {
         get => _otpPinCode;

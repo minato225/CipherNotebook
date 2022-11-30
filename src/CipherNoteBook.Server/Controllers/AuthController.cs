@@ -85,8 +85,8 @@ public class AuthController : ControllerBase
             HttpOnly = true,
             Expires = DateTime.UtcNow.AddDays(7)
         };
-
-        Response.Cookies.Append("refreshToken", token, cookieOptions);
+        if (token is not null)
+            Response.Cookies.Append("refreshToken", token, cookieOptions);
     }
 
     private string IpAddress()

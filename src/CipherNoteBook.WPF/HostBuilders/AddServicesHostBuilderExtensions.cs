@@ -17,8 +17,6 @@ public static class AddServicesHostBuilderExtensions
     public static IHostBuilder AddServices(this IHostBuilder host) => host
         .ConfigureServices(services =>
         {
-            //services.AddSingleton<IPasswordHasher<Account>, PasswordHasher<Account>>();
-
             services.AddHttpClient<ICypherFileTranspher, CypherFileTranspher>(c =>
             {
                 c.BaseAddress = new Uri(@"https://localhost:7160");
@@ -28,9 +26,6 @@ public static class AddServicesHostBuilderExtensions
             {
                 c.BaseAddress = new Uri(@"https://localhost:7160");
             });
-
-            //services.AddSingleton<IDataService<Account>, AccountDataService>();
-            //services.AddSingleton<IAccountService, AccountDataService>();
 
             services.AddSingleton<INavigator, Navigator>();
             services.AddSingleton<IAuthenticator, Authenticator>();

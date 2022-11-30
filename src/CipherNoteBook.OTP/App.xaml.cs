@@ -27,7 +27,6 @@ public partial class App : Application
     {
         _host.Start();
 
-        DbMigrate();
         ShowMainWindow();
 
         base.OnStartup(e);
@@ -39,13 +38,6 @@ public partial class App : Application
         _host.Dispose();
 
         base.OnExit(e);
-    }
-
-    private void DbMigrate()
-    {
-        using var context = _host.Services.GetRequiredService<ClientDbContextFactory>().CreateDbContext();
-
-        context.Database.Migrate();
     }
 
     private void ShowMainWindow() => _host.Services.GetRequiredService<MainWindow>().Show();
