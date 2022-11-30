@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CipherNoteBook.WPF", "CipherNoteBook.WPF\CipherNoteBook.WPF.csproj", "{73BA7956-EDD0-4B9C-9895-A7F633E6AABF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CipherNoteBook.DataBase", "CipherNoteBook.DataBase\CipherNoteBook.DataBase.csproj", "{4339FFD1-C53E-413D-AF0C-1182C7DD4FF5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CipherNoteBook.Domain", "CipherNoteBook.Domain\CipherNoteBook.Domain.csproj", "{186FEC40-3273-4219-818E-B97D8729DBE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CipherNoteBook.OTP", "CipherNoteBook.OTP\CipherNoteBook.OTP.csproj", "{F1707C14-0F62-4ED0-96AA-0BE5DA37079C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CipherNoteBook.Server", "CipherNoteBook.Server\CipherNoteBook.Server.csproj", "{6D18D2BE-3FE5-4D31-BA3F-6D94FBC2DCDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73BA7956-EDD0-4B9C-9895-A7F633E6AABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73BA7956-EDD0-4B9C-9895-A7F633E6AABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73BA7956-EDD0-4B9C-9895-A7F633E6AABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73BA7956-EDD0-4B9C-9895-A7F633E6AABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4339FFD1-C53E-413D-AF0C-1182C7DD4FF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4339FFD1-C53E-413D-AF0C-1182C7DD4FF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4339FFD1-C53E-413D-AF0C-1182C7DD4FF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4339FFD1-C53E-413D-AF0C-1182C7DD4FF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{186FEC40-3273-4219-818E-B97D8729DBE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{186FEC40-3273-4219-818E-B97D8729DBE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{186FEC40-3273-4219-818E-B97D8729DBE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{186FEC40-3273-4219-818E-B97D8729DBE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1707C14-0F62-4ED0-96AA-0BE5DA37079C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1707C14-0F62-4ED0-96AA-0BE5DA37079C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1707C14-0F62-4ED0-96AA-0BE5DA37079C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1707C14-0F62-4ED0-96AA-0BE5DA37079C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D18D2BE-3FE5-4D31-BA3F-6D94FBC2DCDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D18D2BE-3FE5-4D31-BA3F-6D94FBC2DCDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D18D2BE-3FE5-4D31-BA3F-6D94FBC2DCDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D18D2BE-3FE5-4D31-BA3F-6D94FBC2DCDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BABA2E84-A981-454B-8FF1-7C73EDE316A7}
+	EndGlobalSection
+EndGlobal
