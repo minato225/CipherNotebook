@@ -9,12 +9,18 @@ public class AuthenticatorService : IAuthenticatorService
 {
     private readonly HttpClient _httpClient;
 
-    public AuthenticatorService(HttpClient httpClient) => 
+    public AuthenticatorService(HttpClient httpClient) =>
         _httpClient = httpClient;
 
-    public async Task<Account> Login(string username, string password)
+    public async Task<Account> Login(string username, string password, string otpCode)
     {
-        var model = new LoginRequestModel { Email = username, Password = password };
+        var model = new LoginRequestModel
+        {
+            Email = username,
+            Password = password,
+            OtpCode = otpCode
+        };
+
         var response = await _httpClient.PostAsJsonAsync("/api/Auth/login", model);
         var req = await response.Content.ReadFromJsonAsync<AuthenticateResponse>();
 
@@ -26,6 +32,11 @@ public class AuthenticatorService : IAuthenticatorService
         if (req?.ErrorMessage == "InvalidPasswordException")
         {
             throw new InvalidPasswordException(username, password);
+        }
+
+        if (req?.ErrorMessage == "InvalidOtpCodeException")
+        {
+            throw new InvalidOtpCodeException(username, otpCode);
         }
 
         return new Account

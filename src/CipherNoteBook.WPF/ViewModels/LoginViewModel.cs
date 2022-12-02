@@ -19,6 +19,17 @@ public class LoginViewModel : BaseViewModel
         }
     }
 
+    private string _otpText;
+    public string OtpText
+    {
+        get => _otpText;
+        set
+        {
+            _otpText = value;
+            OnPropertyChanged();
+        }
+    }
+
     private string _password;
     public string Password
     {

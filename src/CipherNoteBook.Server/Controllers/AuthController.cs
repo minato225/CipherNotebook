@@ -1,7 +1,6 @@
 ﻿using CipherNoteBook.Domain.Models;
 using CipherNoteBook.Domain.Services.AuthService.interfaces;
 using CipherNoteBook.Server.AuthUtils;
-using CipherNoteBook.Server.Models.AuthModels;
 using CipherNoteBook.Server.Services.AuthServices;
 using Microsoft.AspNetCore.Mvc;
 

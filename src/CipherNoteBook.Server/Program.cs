@@ -11,6 +11,7 @@ using CipherNoteBook.DataBase.Services;
 using CipherNoteBook.Server.Models.AuthModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using CipherNoteBook.Domain.Services.OtpService;
 
 internal class Program
 {
@@ -47,6 +48,7 @@ internal class Program
         builder.Services.AddScoped<IJwtUtils, JwtUtils>();
         builder.Services.AddScoped<IAccountService, AccountDataService>();
         builder.Services.AddScoped<IAuthService, AuthService>();
+        builder.Services.AddScoped<IOtpService, OtpService>();
 
         builder.Services.AddSwaggerGen(c =>
         {

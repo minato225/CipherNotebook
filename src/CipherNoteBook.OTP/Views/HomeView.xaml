@@ -46,22 +46,21 @@
             <TextBlock
                 HorizontalAlignment="Center"
                 d:Text="123456"
-                FontSize="48"
-                Text="{Binding OtpPinCode}" />
+                FontSize="72"
+                Text="{Binding OtpPinCode, Mode=OneWay}" />
             <Button
-                Width="70"
+                Width="200"
                 Height="30"
                 Command="{Binding CopyToClipBoardCommand}"
-                Content="Copy" />
+                Content="Copy To ClipBoard" />
             <ProgressBar
-                Width="200"
+                Width="400"
                 Height="10"
                 Margin="0,10,0,0"
                 d:Value="75"
-                Maximum="100"
+                Maximum="30"
                 Minimum="0"
-                Value="75" />
-            <!--  Value="{Binding TimeLeft}"  -->
+                Value="{Binding TimeLeft, Mode=OneWay}" />
         </StackPanel>
     </Grid>
 </UserControl>

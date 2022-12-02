@@ -18,7 +18,7 @@ public class Authenticator : IAuthenticator
     public event Action StateChanged;
 
     public async Task Login(string username, string password) =>
-        CurrentAccount = await _authenticatorService.Login(username, password);
+        CurrentAccount = await _authenticatorService.Login(username, password, string.Empty);
 
     public void Logout() => CurrentAccount = null;
 }

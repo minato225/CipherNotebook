@@ -23,10 +23,8 @@ public class LoginCommand : AsyncCommandBase
         _loginViewModel.PropertyChanged += LoginViewModel_PropertyChanged;
     }
 
-    public override bool CanExecute(object parameter)
-    {
-        return _loginViewModel.CanLogin && base.CanExecute(parameter);
-    }
+    public override bool CanExecute(object parameter) =>
+        _loginViewModel.CanLogin && base.CanExecute(parameter);
 
     public override async Task ExecuteAsync(object parameter)
     {
@@ -34,7 +32,7 @@ public class LoginCommand : AsyncCommandBase
 
         try
         {
-            await _authenticator.Login(_loginViewModel.UserName, _loginViewModel.Password);
+            await _authenticator.Login(_loginViewModel.UserName, _loginViewModel.Password, _loginViewModel.OtpText);
 
             _renavigator.Renavigate();
         }

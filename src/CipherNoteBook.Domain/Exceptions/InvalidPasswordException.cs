@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CipherNoteBook.Domain.Exceptions;
+﻿namespace CipherNoteBook.Domain.Exceptions;
 
 public class InvalidPasswordException : Exception
 {

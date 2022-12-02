@@ -2,5 +2,5 @@
 
 public interface IOtpService
 {
-
+    bool VerifyOtpCode(string otpCode);
 }
